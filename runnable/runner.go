@@ -5,8 +5,9 @@ import (
 	"reflect"
 	"time"
 
-	"github.com/x893675/valhalla-common/logger"
 	"go.uber.org/zap"
+
+	"github.com/x893675/valhalla-common/logger"
 )
 
 type RunnableService interface {

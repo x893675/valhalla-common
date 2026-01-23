@@ -10,6 +10,7 @@ require (
 	github.com/mitchellh/mapstructure v1.5.0
 	github.com/pkg/errors v0.9.1
 	github.com/redis/go-redis/v9 v9.17.2
+	github.com/sony/sonyflake v1.3.0
 	go.uber.org/zap v1.27.1
 	golang.org/x/crypto v0.47.0
 	gopkg.in/gomail.v2 v2.0.0-20160411212932-81ebce5c23df

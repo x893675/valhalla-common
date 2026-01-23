@@ -20,11 +20,6 @@ func IAMMatcher(arguments ...interface{}) (interface{}, error) {
 
 var DefaultMatcher = NewRegexpMatcher(512)
 
-var (
-	startDelimiter byte = '<'
-	endDelimiter   byte = '>'
-)
-
 func NewRegexpMatcher(size int) *RegexpMatcher {
 	if size <= 0 {
 		size = 512

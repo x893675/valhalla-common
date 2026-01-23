@@ -7,13 +7,14 @@ import (
 	"time"
 
 	"github.com/mitchellh/mapstructure"
+	"gopkg.in/gomail.v2"
+
 	"github.com/x893675/valhalla-common/authentication/user"
 	"github.com/x893675/valhalla-common/cache"
 	"github.com/x893675/valhalla-common/constant"
 	"github.com/x893675/valhalla-common/errdetails"
 	"github.com/x893675/valhalla-common/logger"
 	"github.com/x893675/valhalla-common/utils/random"
-	"gopkg.in/gomail.v2"
 )
 
 const verifyEmailTemplate = `

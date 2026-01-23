@@ -9,13 +9,14 @@ import (
 	openapi "github.com/alibabacloud-go/darabonba-openapi/v2/client"
 	dysmsapi "github.com/alibabacloud-go/dysmsapi-20170525/v3/client"
 	"github.com/mitchellh/mapstructure"
+	"go.uber.org/zap"
+
 	"github.com/x893675/valhalla-common/authentication/user"
 	"github.com/x893675/valhalla-common/cache"
 	"github.com/x893675/valhalla-common/constant"
 	"github.com/x893675/valhalla-common/errdetails"
 	"github.com/x893675/valhalla-common/logger"
 	"github.com/x893675/valhalla-common/utils/random"
-	"go.uber.org/zap"
 )
 
 func init() {
