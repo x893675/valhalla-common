@@ -16,7 +16,7 @@ type TokenManager interface {
 	// IssueTo issues a token a User, return error if issuing process failed
 	IssueTo(ctx context.Context, user user.Info, expire time.Duration) (string, error)
 	// RevokeAllUserTokens revoke all user tokens
-	RevokeAllUserTokens(ctx context.Context, uid uint64) error
+	RevokeAllUserTokens(ctx context.Context, uid string) error
 }
 
 type Options struct {

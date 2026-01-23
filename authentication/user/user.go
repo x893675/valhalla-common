@@ -4,7 +4,7 @@ import "encoding/json"
 
 type Info interface {
 	GetName() string
-	GetID() uint64
+	GetID() string
 	GetDomain() string
 	GetEmail() string
 	GetPhone() string
@@ -15,7 +15,7 @@ type Info interface {
 
 type DefaultInfo struct {
 	Name   string              `json:"name"`
-	ID     uint64              `json:"id"`
+	ID     string              `json:"id"`
 	Domain string              `json:"domain"`
 	Email  string              `json:"email"`
 	Phone  string              `json:"phone"`
@@ -35,7 +35,7 @@ func (i *DefaultInfo) GetName() string {
 	return i.Name
 }
 
-func (i *DefaultInfo) GetID() uint64 {
+func (i *DefaultInfo) GetID() string {
 	return i.ID
 }
 

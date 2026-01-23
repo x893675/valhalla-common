@@ -19,7 +19,7 @@ var _ authenticator.Token = (*AESTokenAuthenticator)(nil)
 var _ TokenManager = (*AESTokenAuthenticator)(nil)
 
 type Claims struct {
-	UID       uint64 `json:"uid"`
+	UID       string `json:"uid"`
 	ExpiresAt int64  `json:"exp,omitempty"`
 	Issuer    string `json:"iss,omitempty"`
 }
@@ -83,7 +83,7 @@ func (a *AESTokenAuthenticator) IssueTo(ctx context.Context, user user.Info, exp
 	return t, nil
 }
 
-func (a *AESTokenAuthenticator) RevokeAllUserTokens(ctx context.Context, uid uint64) error {
+func (a *AESTokenAuthenticator) RevokeAllUserTokens(ctx context.Context, uid string) error {
 	return a.cache.RemoveWithPattern(ctx, fmt.Sprintf(constant.TokenCacheKeyFormat, uid, "*"))
 }
 
