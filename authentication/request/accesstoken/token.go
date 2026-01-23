@@ -25,7 +25,7 @@ func (a *Authenticator) AuthenticateRequest(req *http.Request) (*authenticator.R
 		return nil, false, fmt.Errorf("[access_token] authorization in header is empty")
 	}
 	parts := strings.Split(auth, " ")
-	if len(parts) < 2 || strings.ToLower(parts[0]) != "token" {
+	if len(parts) < 2 || strings.ToLower(parts[0]) != "bearer" {
 		return nil, false, fmt.Errorf("[access_token] token[%s] format error", auth)
 	}
 
