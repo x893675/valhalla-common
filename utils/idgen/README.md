@@ -49,11 +49,11 @@ idStr := idgen.MustNextIDString()
 ```go
 // 生成用户 ID
 userID := idgen.MustNextIDStringWithPrefix("user")
-// 输出: user:123456789012345
+// 输出: user-123456789012345
 
 // 生成订单 ID
 orderID := idgen.MustNextIDStringWithPrefix("order")
-// 输出: order:123456789012346
+// 输出: order-123456789012346
 
 // 空前缀时只返回 ID
 id := idgen.MustNextIDStringWithPrefix("")
@@ -86,7 +86,7 @@ func init() {
 ### 函数列表
 
 | 函数 | 返回值 | 说明 |
-|------|--------|------|
+| ------ | -------- | ------ |
 | `NextID()` | `(uint64, error)` | 生成下一个唯一 ID |
 | `MustNextID()` | `uint64` | 生成下一个唯一 ID，出错时 panic |
 | `NextIDString()` | `(string, error)` | 生成下一个唯一 ID 的字符串形式 |
@@ -100,7 +100,7 @@ func init() {
 在 Apple M2 处理器上的性能测试结果：
 
 | 操作 | 耗时 | 内存分配 | 分配次数 |
-|------|------|----------|----------|
+| ------ | ------ | ---------- | ---------- |
 | NextID | ~39µs | 0 B | 0 |
 | MustNextID | ~39µs | 0 B | 0 |
 | NextIDString | ~39µs | 24 B | 1 |
@@ -109,6 +109,7 @@ func init() {
 | NextIDStringWithPrefix (长前缀) | ~39µs | 120 B | 4 |
 
 **并发性能**：
+
 - 单线程：~39µs/op
 - 并发场景：~39µs/op (性能保持稳定)
 - 1000 协程并发：~38µs/op
@@ -138,22 +139,27 @@ go test -cover ./utils/idgen/
 相比原实现，本次优化包括：
 
 ### 1. 修复了 Bug
+
 - **修复前**: `MustNextIDStringWithPrefix` 在错误时返回空字符串 `""`
 - **修复后**: 出错时 panic，与其他 `Must*` 函数行为一致
 
 ### 2. 改进了初始化逻辑
+
 - **修复前**: 使用全局变量直接初始化，无法自定义配置
 - **修复后**: 使用 `sync.Once` 实现延迟初始化，支持自定义配置
 
 ### 3. 增强了错误处理
+
 - 所有 `Must*` 函数在 panic 时提供更详细的错误信息
 - 错误信息使用 `fmt.Errorf` 包装，便于错误追踪
 
 ### 4. 新增了函数
+
 - `NextIDStringWithPrefix()`: 非 panic 版本的带前缀 ID 生成
 - `Initialize()`: 允许自定义 sonyflake 配置
 
 ### 5. 完善的测试
+
 - ✅ 单元测试：100% 覆盖所有函数
 - ✅ 并发测试：验证高并发场景下的正确性
 - ✅ 性能测试：全面的性能基准测试
@@ -165,7 +171,7 @@ go test -cover ./utils/idgen/
 2. **ID 递增性**: 生成的 ID 是严格递增的（在同一进程内）
 3. **唯一性保证**: 只要机器 ID 不同，即使在分布式环境下也能保证唯一性
 4. **配置一次**: `Initialize()` 使用 `sync.Once` 实现，多次调用只有第一次有效
-5. **性能考虑**: 
+5. **性能考虑**:
    - `NextID()` 性能最佳（无内存分配）
    - `NextIDString()` 有 1 次内存分配
    - `NextIDStringWithPrefix()` 有 4 次内存分配

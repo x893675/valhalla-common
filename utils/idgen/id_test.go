@@ -124,13 +124,13 @@ func TestNextIDStringWithPrefix(t *testing.T) {
 			}
 
 			if tt.prefix != "" {
-				expected := tt.prefix + ":"
+				expected := tt.prefix + "-"
 				if !strings.HasPrefix(id, expected) {
 					t.Errorf("NextIDStringWithPrefix() = %v, want prefix %v", id, expected)
 				}
 
 				// 验证前缀后面是有效的 ID
-				parts := strings.SplitN(id, ":", 2)
+				parts := strings.SplitN(id, "-", 2)
 				if len(parts) != 2 {
 					t.Errorf("NextIDStringWithPrefix() returned invalid format: %v", id)
 				}
@@ -171,13 +171,13 @@ func TestMustNextIDStringWithPrefix(t *testing.T) {
 			id := MustNextIDStringWithPrefix(tt.prefix)
 
 			if tt.prefix != "" {
-				expected := tt.prefix + ":"
+				expected := tt.prefix + "-"
 				if !strings.HasPrefix(id, expected) {
 					t.Errorf("MustNextIDStringWithPrefix() = %v, want prefix %v", id, expected)
 				}
 
 				// 验证前缀后面是有效的 ID
-				parts := strings.SplitN(id, ":", 2)
+				parts := strings.SplitN(id, "-", 2)
 				if len(parts) != 2 {
 					t.Errorf("MustNextIDStringWithPrefix() returned invalid format: %v", id)
 				}

@@ -73,7 +73,7 @@ func NextIDStringWithPrefix(prefix string) (string, error) {
 	if prefix == "" {
 		return id, nil
 	}
-	return fmt.Sprintf("%s:%s", prefix, id), nil
+	return fmt.Sprintf("%s-%s", prefix, id), nil
 }
 
 // MustNextIDStringWithPrefix 生成带前缀的 ID 字符串，出错时 panic
