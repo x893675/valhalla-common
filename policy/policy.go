@@ -7,12 +7,12 @@ type Principal struct {
 }
 
 type PolicyStatement struct {
-	Version    string    `json:"version,omitempty"`
-	Effect     string    `json:"effect,omitempty"`
-	Resources  []string  `json:"resources,omitempty"`
-	Actions    []string  `json:"actions,omitempty"`
-	Principal  Principal `json:"principal,omitempty"`
-	Conditions Condition `json:"conditions,omitempty"`
+	Version    string     `json:"version,omitempty"`
+	Effect     string     `json:"effect,omitempty"`
+	Resources  []string   `json:"resources,omitempty"`
+	Actions    []string   `json:"actions,omitempty"`
+	Principal  *Principal `json:"principal,omitempty"`
+	Conditions Condition  `json:"conditions,omitempty"`
 }
 
 /*
