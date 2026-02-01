@@ -323,8 +323,9 @@ type ConditionParser interface {
 }
 
 var ConditionKeyMap = map[string]ConditionParser{
-	"acs:SourceIP":    &SourceIP{},
-	"acs:CurrentTime": &CurrentTime{},
+	"inf:SourceIP":    &SourceIP{},
+	"inf:CurrentTime": &CurrentTime{},
+	"iam:ServiceName": &Service{},
 }
 
 type ConditionContext map[string]any

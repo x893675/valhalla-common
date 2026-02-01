@@ -7,6 +7,9 @@ import (
 func ConditionMather(arguments ...interface{}) (interface{}, error) {
 	condsContextString := arguments[0].(string)
 	conditionString := arguments[1].(string)
+	if conditionString == "" {
+		return true, nil
+	}
 	var conds Condition
 	err := json.Unmarshal([]byte(conditionString), &conds)
 	if err != nil {
