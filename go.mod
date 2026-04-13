@@ -1,6 +1,6 @@
 module github.com/x893675/valhalla-common
 
-go 1.24.10
+go 1.24.0
 
 require (
 	github.com/alibabacloud-go/darabonba-openapi/v2 v2.1.14
