@@ -5,6 +5,7 @@ import (
 	"net/http"
 
 	"github.com/x893675/valhalla-common/authentication/authenticator"
+	"github.com/x893675/valhalla-common/logger"
 )
 
 var _ authenticator.Request = (*unionAuthRequestHandler)(nil)
@@ -18,6 +19,7 @@ func (u *unionAuthRequestHandler) AuthenticateRequest(req *http.Request) (*authe
 	var errlist []error
 	for _, currAuthRequestHandler := range u.Handlers {
 		resp, ok, err := currAuthRequestHandler.AuthenticateRequest(req)
+		logger.Debugf("AuthenticateRequest: %v, %v, %v", resp, ok, err)
 		if err != nil {
 			if u.FailOnError {
 				return resp, ok, err

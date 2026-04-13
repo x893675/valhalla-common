@@ -31,14 +31,15 @@ func DefaultOptions() *Options {
 	}
 }
 
-func NewTokenManager(cache cache.Interface, opts *Options) (TokenManager, error) {
+// NewTokenManager constructs a TokenManager. ssa resolves system service account credentials against storage when claims indicate service_account, and handles legacy opaque tokens when AES parsing fails.
+func NewTokenManager(cache cache.Interface, opts *Options, ssa SystemAccountResolver) (TokenManager, error) {
 	if opts == nil {
 		logger.Debug("token manager options is nil, use default options")
 		opts = DefaultOptions()
 	}
 	switch opts.Type {
 	case "aes":
-		return NewAESTokenAuthenticator([]byte(opts.Secret), cache, time.Now), nil
+		return NewAESTokenAuthenticator([]byte(opts.Secret), cache, time.Now, ssa), nil
 	default:
 		return nil, fmt.Errorf("unknown token type: %s", opts.Type)
 	}
